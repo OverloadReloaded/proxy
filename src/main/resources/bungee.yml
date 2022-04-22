@@ -1,0 +1,5 @@
+name: Proxy
+author: FafMio
+version: 0.0.1-BETA
+main: net.overload.proxy.ProxyPlugin
+depends: [Commons]
