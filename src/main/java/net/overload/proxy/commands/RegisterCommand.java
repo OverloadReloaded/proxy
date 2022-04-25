@@ -17,10 +17,10 @@ public class RegisterCommand extends Command {
 	@Override
 	public void execute(CommandSender sender, String[] args) {
 		if(args.length > 2) {
-			sender.sendMessage("$cUsage: /register <name> <port>");
+			sender.sendMessage("§cUsage: /register <name> <port>");
 		} else {
 			ServerInfo serverInfo = ProxyPlugin.get().psm.addServer(args[0], Integer.parseInt(args[1]));
-			sender.sendMessage("$aServer registered !");
+			sender.sendMessage("§aServer registered !");
 			sender.sendMessage(new GsonBuilder().create().toJson(serverInfo));
 		}
 		

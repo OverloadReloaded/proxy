@@ -96,9 +96,11 @@ public class ProxyServerManager {
 		for(String server : newAllAlive) {
 			if(!ProxyPlugin.get().getProxy().getServers().containsKey(server)) {
 				MinecraftServerInfo msi = new GsonBuilder().create().fromJson(ProxyPlugin.get().redis.getDatabase().get(String.format(OverloadRedisStrings.SERVER_LIST.s(), server)), MinecraftServerInfo.class);
-				InetSocketAddress inetadresse = new InetSocketAddress("localhost", msi.getServerPort());
-		        ServerInfo si = ProxyPlugin.get().getProxy().constructServerInfo(server, inetadresse, "", false);
-		        ProxyPlugin.get().getProxy().getServers().put(server, si);
+				if(msi != null) {
+					InetSocketAddress inetadresse = new InetSocketAddress("localhost", msi.getServerPort());
+			        ServerInfo si = ProxyPlugin.get().getProxy().constructServerInfo(server, inetadresse, "", false);
+			        ProxyPlugin.get().getProxy().getServers().put(server, si);
+				}
 		        
 		        this.list.put(msi.getServerName(), msi);
 		        ProxyPlugin.get().logger().send(LogLevel.INFO, "Registered: " + msi.getServerName() + " as " + msi.getType().toString());

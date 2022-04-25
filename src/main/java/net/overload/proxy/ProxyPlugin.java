@@ -3,6 +3,7 @@ package net.overload.proxy;
 import com.google.gson.GsonBuilder;
 
 import net.md_5.bungee.api.plugin.Plugin;
+import net.overload.commons.CommonsPluginBungee;
 import net.overload.commons.databases.OverloadRedis;
 import net.overload.commons.logger.LogLevel;
 import net.overload.commons.logger.Logger;
@@ -68,6 +69,7 @@ public class ProxyPlugin extends Plugin {
 				JedisPubSub pubsub = new JedisPubSub() {
 					@Override
 					public void onMessage(String channel, String message) {
+						if(CommonsPluginBungee.get().config.getShowJedisMessaging()) logger().send(LogLevel.CMD, "Received on : " + channel + ". Message : " + message);
 						if(channel.equals("toBungee")) {
 							String[] argss = message.split(";");
 							if(argss[0].equals("send")) {
